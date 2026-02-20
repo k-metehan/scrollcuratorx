@@ -1,10 +1,10 @@
-# Scroll Curator
+# Scroll Curator for Twitter/X
 
-**⚠️ Educational/Personal Use Only**
+** Educational/Personal Use Only**
 
 A browser extension for personal content curation from Twitter/X.
 
-## ⚠️ Legal Disclaimer
+##  Legal Disclaimer
 This tool is for **personal productivity and educational purposes only**. 
 - You must comply with Twitter/X Terms of Service
 - Only use on content you have rights to access
