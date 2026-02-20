@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scroll Curator</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div id="app">
+    <!-- MAIN PAGE -->
+    <div id="main-page" class="page active">
+      <!-- Header with folder tabs -->
+      <header class="header">
+        <div class="header-top">
+          <h1>Scroll Curator</h1>
+          <button id="settings-btn" class="icon-btn" title="Settings">⚙️</button>
+        </div>
+        
+        <!-- Folder tabs -->
+        <div class="folder-tabs" id="folder-tabs">
+          <!-- Dynamically populated -->
+        </div>
+      </header>
+
+      <!-- Search & Filter Bar -->
+      <div class="search-filter-bar">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="search-input" placeholder="Search saved tweets...">
+        </div>
+        <button id="filter-toggle" class="filter-btn" title="Filters">⚙️ Filters</button>
+      </div>
+
+      <!-- Filter Panel (collapsible) -->
+      <div class="filter-panel hidden" id="filter-panel">
+        <div class="filter-section">
+          <label>Date Range</label>
+          <div class="date-filters">
+            <button class="date-btn active" data-days="all">All</button>
+            <button class="date-btn" data-days="7">7 days</button>
+            <button class="date-btn" data-days="30">30 days</button>
+            <button class="date-btn" data-days="custom">Custom</button>
+          </div>
+          <div class="custom-date hidden" id="custom-date">
+            <input type="date" id="date-from" placeholder="From">
+            <span>to</span>
+            <input type="date" id="date-to" placeholder="To">
+          </div>
+        </div>
+        
+        <div class="filter-section">
+          <label>Engagement</label>
+          <select id="engagement-filter">
+            <option value="0">All tweets</option>
+            <option value="1000">1K+ likes</option>
+            <option value="5000">5K+ likes</option>
+            <option value="10000">10K+ likes</option>
+            <option value="50000">50K+ likes</option>
+          </select>
+        </div>
+        
+        <button id="clear-filters" class="clear-filters-btn">Clear Filters</button>
+      </div>
+
+      <!-- Tweets list -->
+      <main class="tweets-list" id="tweets-list">
+        <div class="empty-state" id="empty-state">
+          <span class="empty-icon">📭</span>
+          <p>No saved tweets in this folder</p>
+          <p class="empty-hint">
+            <span id="folder-hint-most">High-engagement tweets appear here automatically</span>
+            <span id="folder-hint-read" style="display:none">Bookmark tweets to save them here</span>
+          </p>
+        </div>
+      </main>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <span id="footer-count">0 items</span>
+      </footer>
+    </div>
+
+    <!-- SETTINGS PAGE -->
+    <div id="settings-page" class="page">
+      <header class="header">
+        <div class="header-top">
+          <button id="back-btn" class="icon-btn" title="Back">←</button>
+          <h1>Settings</h1>
+          <div class="spacer"></div>
+        </div>
+      </header>
+
+      <main class="settings-content">
+        <!-- Storage -->
+        <section class="setting-section">
+          <h2>Storage</h2>
+          <div class="storage-bar">
+            <div class="storage-fill" id="storage-fill"></div>
+          </div>
+          <div class="storage-text" id="storage-text">0 MB / 1.00 GB</div>
+        </section>
+
+        <!-- Auto-save threshold -->
+        <section class="setting-section">
+          <h2>Auto-save Threshold</h2>
+          <p class="setting-desc">Tweets with this many likes are auto-saved to "Most Liked"</p>
+          <div class="threshold-control">
+            <input type="range" id="threshold-slider" min="1000" max="50000" step="1000" value="5000">
+            <div class="threshold-value">
+              <span id="threshold-display">5,000</span> likes
+            </div>
+          </div>
+        </section>
+
+        <!-- Export -->
+        <section class="setting-section">
+          <h2>Export</h2>
+          <p class="setting-desc">Export your bookmarked tweets as Markdown</p>
+          <div class="export-buttons">
+            <button id="export-today-btn" class="btn btn-secondary">📅 Today's Bookmarks</button>
+            <button id="export-all-btn" class="btn btn-secondary">📋 All Bookmarks</button>
+          </div>
+        </section>
+
+        <!-- Data Management -->
+        <section class="setting-section">
+          <h2>Data Management</h2>
+          <button id="clear-all-btn" class="btn btn-danger">🗑️ Clear All Data</button>
+        </section>
+
+        <!-- Version -->
+        <div class="version">Scroll Curator v2.0.0</div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Confirm Modal -->
+  <div id="confirm-modal" class="modal hidden">
+    <div class="modal-content">
+      <h3>Clear All Data?</h3>
+      <p>This will permanently delete all your saved tweets. This action cannot be undone.</p>
+      <div class="modal-actions">
+        <button id="cancel-clear" class="btn btn-secondary">Cancel</button>
+        <button id="confirm-clear" class="btn btn-danger">Clear All</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

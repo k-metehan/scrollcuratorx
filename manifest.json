@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "Scroll Curator",
+  "version": "2.0.0",
+  "description": "Minimal tweet curation - save viral content effortlessly",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting",
+    "downloads"
+  ],
+  "host_permissions": [
+    "*://twitter.com/*",
+    "*://x.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://twitter.com/*",
+        "*://x.com/*"
+      ],
+      "js": ["content.js"],
+      "css": ["badge.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["badge.css"],
+      "matches": ["*://twitter.com/*", "*://x.com/*"]
+    }
+  ]
+}
